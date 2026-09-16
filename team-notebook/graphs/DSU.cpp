@@ -2,7 +2,7 @@
 using namespace std;
 
 struct DSU
-{
+{   
     vector<int> parent, sz;
 
     DSU(int n)
