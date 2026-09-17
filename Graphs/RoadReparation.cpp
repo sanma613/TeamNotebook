@@ -41,12 +41,23 @@ struct DSU
     }
 };
 
+struct Edge
+{
+    int u, v;
+    long long c;
+    bool operator<(const Edge &other)
+    {
+        return c < other.c;
+    }
+};
+
 void solve()
 {
     int n, m;
     cin >> n >> m;
 
-    priority_queue<Edge, vector<Edge>, greater<Edge>> pq;
+    vector<Edge> edges;
+    edges.reserve(m);
 
     for (int i = 0; i < m; i++)
     {
@@ -54,25 +65,27 @@ void solve()
         long long c;
         cin >> u >> v >> c;
 
-        pq.push({c, u, v});
+        edges.push_back({u, v, c});
     }
+
+    sort(edges.begin(), edges.end());
 
     DSU dsu(n);
 
     long long result = 0;
-    int edges = 0;
-    while (!pq.empty())
+    int count = 0;
+    for (const auto &edge : edges)
     {
-        auto [c, u, v] = pq.top();
-        pq.pop();
-        if (dsu.unite(u, v))
+        if (dsu.unite(edge.u, edge.v))
         {
-            result += c;
-            edges += 1;
+            result += edge.c;
+            count++;
+            if (count == n - 1)
+                break;
         }
     }
 
-    if (edges < n - 1)
+    if (count < n - 1)
     {
         cout << "IMPOSSIBLE";
         return;
