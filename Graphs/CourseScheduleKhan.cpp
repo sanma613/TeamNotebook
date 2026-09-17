@@ -27,6 +27,7 @@ void solve()
     }
 
     vector<int> ans;
+    ans.reserve(n);
     while (!q.empty())
     {
         int u = q.front();

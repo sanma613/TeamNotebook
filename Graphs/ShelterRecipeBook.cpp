@@ -11,13 +11,15 @@ void solve()
     vector<int> in_degree(n);
     unordered_map<string, vector<int>> adj;
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++)
+    {
         int t;
         cin >> products[i] >> t;
 
         in_degree[i] += t;
 
-        for (int j = 0; j < t; j++) {
+        for (int j = 0; j < t; j++)
+        {
             string rcp;
             cin >> rcp;
 
@@ -30,20 +32,24 @@ void solve()
     cin >> k;
     queue<string> q;
 
-    for (int i = 0; i < k; i++){
+    for (int i = 0; i < k; i++)
+    {
         string raw;
         cin >> raw;
 
         q.push(raw);
     }
 
-    while (!q.empty()) {
+    while (!q.empty())
+    {
         string raw = q.front();
         q.pop();
 
-        for (int i : adj[raw]){
+        for (int i : adj[raw])
+        {
             in_degree[i]--;
-            if (in_degree[i] == 0){
+            if (in_degree[i] == 0)
+            {
                 q.push(products[i]);
             }
         }
@@ -51,15 +57,18 @@ void solve()
 
     vector<string> completed;
 
-    for (int i = 0; i < n; i++){
-        if (in_degree[i] == 0){
+    for (int i = 0; i < n; i++)
+    {
+        if (in_degree[i] == 0)
+        {
             completed.push_back(products[i]);
         }
     }
 
     cout << completed.size() << '\n';
-    for (int i = 0; i < completed.size(); i++){
-        cout << completed[i] << (i == n - 1 ? "\n" : " ");
+    for (int i = 0; i < (int)completed.size(); i++)
+    {
+        cout << completed[i] << (i == (int)completed.size() - 1 ? "\n" : " ");
     }
 }
 
