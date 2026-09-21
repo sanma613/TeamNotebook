@@ -1,2 +1,9 @@
-Executables/*
+Executables/
+build/
+*.out
+a.out
+*.o
+notebook.pdf
+notebook.md
+
 .vscode/*
